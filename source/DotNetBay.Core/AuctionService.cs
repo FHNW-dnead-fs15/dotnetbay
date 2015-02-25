@@ -10,9 +10,12 @@ namespace DotNetBay.Core
     {
         private readonly IMainRepository mainRepository;
 
-        public AuctionService(IMainRepository mainRepository)
+        private readonly IMemberService memberService;
+
+        public AuctionService(IMainRepository mainRepository, IMemberService memberService)
         {
             this.mainRepository = mainRepository;
+            this.memberService = memberService;
         }
 
         public Auction GetById(long id)
@@ -45,7 +48,7 @@ namespace DotNetBay.Core
                 throw new ArgumentException("This auction does not exist in the store");
             }
 
-            if (auct.StartDateTimeUtc < DateTime.UtcNow)
+            if (auct.StartDateTimeUtc > DateTime.UtcNow)
             {
                 throw new Exception("The requested auction has not started yet");
             }
@@ -94,6 +97,11 @@ namespace DotNetBay.Core
             if (auction.Seller == null)
             {
                 throw new ArgumentException("The Seller of an auction cannot be null", "auction");
+            }
+
+            if (this.memberService.GetByUniqueId(auction.Seller.UniqueId) == null)
+            {
+                throw new ArgumentException("The seller cannot be cound and has to be created before using it in a auction", "auction");
             }
 
             if (auction.Winner != null)

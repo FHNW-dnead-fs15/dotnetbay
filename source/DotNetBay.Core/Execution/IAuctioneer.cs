@@ -8,6 +8,8 @@ namespace DotNetBay.Core.Execution
 
         event EventHandler<ProcessedBidEventArgs> BidAccepted;
 
-        event EventHandler<AuctionEventArgs> AuctionClosed;
+        event EventHandler<AuctionEventArgs> AuctionEnded;
+
+        event EventHandler<AuctionEventArgs> AuctionStarted;
     }
 }

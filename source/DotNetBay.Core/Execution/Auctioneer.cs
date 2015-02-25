@@ -20,15 +20,19 @@ namespace DotNetBay.Core.Execution
 
         public event EventHandler<ProcessedBidEventArgs> BidAccepted;
 
-        public event EventHandler<AuctionEventArgs> AuctionClosed;
+        public event EventHandler<AuctionEventArgs> AuctionStarted; 
+
+        public event EventHandler<AuctionEventArgs> AuctionEnded;
 
         #endregion
 
         public void DoAllWork()
         {
+            this.StartPendingAuctions();
+
             this.ProcessOpenBids();
 
-            this.CloseFinishedAuctions();
+            this.EndAndCloseFinishedAuctions();
         }
 
         #region Event Invocation
@@ -51,9 +55,18 @@ namespace DotNetBay.Core.Execution
             }
         }
 
-        protected virtual void OnAuctionClosed(AuctionEventArgs e)
+        protected virtual void OnAuctionStarted(AuctionEventArgs e)
         {
-            var handler = this.AuctionClosed;
+            var handler = this.AuctionStarted;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void OnAuctionEnded(AuctionEventArgs e)
+        {
+            var handler = this.AuctionEnded;
             if (handler != null)
             {
                 handler(this, e);
@@ -63,6 +76,21 @@ namespace DotNetBay.Core.Execution
         #endregion
 
         #region The Magic itself
+
+        private void StartPendingAuctions()
+        {
+            // Process all auctions which should be closed
+            var auctionsToStart = this.repository.GetAuctions().Where(a => !a.IsRunning && a.StartDateTimeUtc < DateTime.UtcNow).ToList();
+
+            foreach (var auction in auctionsToStart)
+            {
+                auction.IsRunning = true;
+
+                this.OnAuctionStarted(new AuctionEventArgs() { Auction = auction, IsSuccessful = true });
+            }
+
+            this.repository.SaveChanges();
+        }
 
         private void ProcessOpenBids()
         {
@@ -75,11 +103,11 @@ namespace DotNetBay.Core.Execution
 
                 foreach (var bid in openBids)
                 {
-                    if (bid.Amount > auction.CurrentPrice)
+                    if (bid.Amount > Math.Max(auction.CurrentPrice, auction.StartPrice))
                     {
                         if (auction.ActiveBid != null && bid.ReceivedOnUtc < auction.ActiveBid.ReceivedOnUtc)
                         {
-                            throw new ApplicationException("Cannot handle higher bids which where look like coming from history!");
+                            throw new ApplicationException("Cannot handle higher bids which look like coming from history!");
                         }
 
                         bid.Accepted = true;
@@ -98,11 +126,10 @@ namespace DotNetBay.Core.Execution
             this.repository.SaveChanges();
         }
 
-        private void CloseFinishedAuctions()
+        private void EndAndCloseFinishedAuctions()
         {
             // Process all auctions which should be closed
-            var auctionsToClose =
-                this.repository.GetAuctions().Where(a => !a.IsClosed && a.EndDateTimeUtc <= DateTime.UtcNow).ToList();
+            var auctionsToClose = this.repository.GetAuctions().Where(a => !a.IsClosed && a.EndDateTimeUtc <= DateTime.UtcNow).ToList();
 
             foreach (var auction in auctionsToClose)
             {
@@ -117,12 +144,13 @@ namespace DotNetBay.Core.Execution
                     auction.Winner = auction.ActiveBid.Bidder;
                 }
 
+                auction.IsRunning = false;
                 auction.IsClosed = true;
                 auction.CloseDateTimeUtc = DateTime.UtcNow;
 
                 this.repository.SaveChanges();
 
-                this.OnAuctionClosed(
+                this.OnAuctionEnded(
                     new AuctionEventArgs() { Auction = auction, IsSuccessful = auction.Winner != null });
             }
         }

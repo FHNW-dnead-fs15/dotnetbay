@@ -36,6 +36,16 @@ namespace DotNetBay.Test.Storage
         }
 
         [TestCase]
+        public void GivenANewRepository_CanBeSaved_WithNoIssues()
+        {
+            using (var factory = this.CreateFactory())
+            {
+                var initRepo = factory.CreateMainRepository();
+                initRepo.SaveChanges();
+            }
+        }
+
+        [TestCase]
         public void GivenAnEmptyRepo_AddAuctionWithSeller_AuctionAndMemberAreRepodIndividually()
         {
             var myAuction = CreateAnAuction();
@@ -71,7 +81,7 @@ namespace DotNetBay.Test.Storage
         }
 
         [TestCase]
-        public void GivenAnEmptyRepo_AddAMemberWithAuctions_MemberAndAuctionsAreRepodIndividually()
+        public void GivenAnEmptyRepo_AddAMemberWithAuctions_MemberAndAuctionsAreInRepoIndividually()
         {
             var myAuction = CreateAnAuction();
             var myMember = CreateAMember();
@@ -440,7 +450,7 @@ namespace DotNetBay.Test.Storage
         {
             return new Member()
             {
-                Name = "GeneratedMember",
+                DisplayName = "GeneratedMember",
                 UniqueId = "UniqueId" + Guid.NewGuid()
             };
         }
