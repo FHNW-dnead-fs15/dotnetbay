@@ -1,0 +1,29 @@
+﻿<Window x:Class="DotNetBay.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+
+    <StackPanel VerticalAlignment="Stretch">
+
+        <Button HorizontalAlignment="Left" Width="100">New Auction</Button>
+
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Auctions}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Auction" Binding="{Binding Path=Title}" />
+                <DataGridTextColumn Header="Starts" Binding="{Binding Path=StartDateTimeUtc}" />
+                <DataGridTextColumn Header="Ends" Binding="{Binding Path=EndDateTimeUtc}" />
+                <DataGridTextColumn Header="Start Price" Binding="{Binding Path=StartPrice}" />
+                <DataGridTextColumn Header="Start Price" Binding="{Binding Path=Seller}" />
+                <DataGridTemplateColumn Header="Place Bid">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="BuyAction" Background="DarkGreen" Height="50" Width="50">Buy</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+
+
+</Window>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetBay.Cmd", "DotNetBay.Cmd\DotNetBay.Cmd.csproj", "{EB070B8C-4CBF-425D-90FA-48834DBEE9B8}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetBay.Interfaces", "DotNetBay.Interfaces\DotNetBay.Interfaces.csproj", "{17745E6C-337C-44BD-9C50-5F1D45CEADA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetBay.Test", "DotNetBay.Test\DotNetBay.Test.csproj", "{9DFA662D-5CF3-43E6-88E1-61D4D1FE02AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetBay.WPF", "DotNetBay.WPF\DotNetBay.WPF.csproj", "{BA9E862C-EE75-4699-BBEF-C185C5A26C95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{9DFA662D-5CF3-43E6-88E1-61D4D1FE02AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DFA662D-5CF3-43E6-88E1-61D4D1FE02AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DFA662D-5CF3-43E6-88E1-61D4D1FE02AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA9E862C-EE75-4699-BBEF-C185C5A26C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA9E862C-EE75-4699-BBEF-C185C5A26C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA9E862C-EE75-4699-BBEF-C185C5A26C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA9E862C-EE75-4699-BBEF-C185C5A26C95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
