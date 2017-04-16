@@ -1,0 +1,60 @@
+﻿<Window x:Class="DotNetBay.WPF.SellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpftk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DotNetBay.WPF" 
+        d:DataContext="{d:DesignInstance Type=local:SellView}" 
+        mc:Ignorable="d"                    
+        Title="SellView" Height="385" Width="567"  ResizeMode="NoResize">
+    <Grid Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="12"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock FontWeight="Bold" FontSize="20">Add New Auction</TextBlock>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Row="0">Title</Label>
+            <Label Grid.Row="1">Description</Label>
+            <Label Grid.Row="2">Start Price</Label>
+            <Label Grid.Row="3">Start</Label>
+            <Label Grid.Row="4">End</Label>
+            <Label Grid.Row="5">Image</Label>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NewAuction.Title}"/>
+            <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="90" Grid.Row="1" Grid.Column="1" Text="{Binding NewAuction.Description}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NewAuction.StartPrice}"/>
+
+            <wpftk:DateTimePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Value="{Binding NewAuction.StartDateTimeUtc}" Width="240"></wpftk:DateTimePicker>
+            <wpftk:DateTimePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Value="{Binding NewAuction.EndDateTimeUtc}"  Width="240"></wpftk:DateTimePicker>
+            <TextBox Name="txt_image" IsReadOnly="True" Grid.Row="5" Grid.Column="1" Margin="0,0,36,0" Text="{Binding FilePathToImage}"></TextBox>
+            <Button Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Width="30" Click="Image_Click">...</Button>
+            <!-- Click="SelectImageButtonClick" -->
+        </Grid>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Padding="5" Margin="5,5,0,5" IsDefault="True" HorizontalAlignment="Left" Click="AddAuctionClick">Add Auction</Button>
+            <Button Padding="5" Margin="5,5,0,5" HorizontalAlignment="Left" Click="CloseButtonClick">Cancel</Button>
+        </StackPanel>  
+    </Grid>
+</Window>

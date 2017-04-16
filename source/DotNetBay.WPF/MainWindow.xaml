@@ -1,0 +1,44 @@
+﻿<Window x:Class="DotNetBay.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DotNetBay.WPF"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+        mc:Ignorable="d"
+        
+        Title="MainWindow" Height="400" Width="700">
+
+    <Window.Resources>
+        <!-- <local:IsClosedToStatusTextConverter x:Key="IsClosedToStatusTextConverter"></local:IsClosedToStatusTextConverter> -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+    </Window.Resources>
+
+    <Grid>
+        <Button Name="AddAuction" Content="add auction" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddAuction_Click" />
+        <DataGrid ItemsSource="{Binding Path=Auctions}" Margin="0, 40, 0, 0" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Auction" Binding="{Binding Path=Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=IsRunning}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Start Price" Binding="{Binding Path=StartPrice}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Current Price" Binding="{Binding Path=CurrentPrice}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Bids" Binding="{Binding Path=Bids}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Starts" Binding="{Binding Path=StartDateTimeUtc}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ends" Binding="{Binding Path=EndDateTimeUtc}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Seller" Binding="{Binding Path=Seller}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Current Winner" Binding="{Binding Path=Winner}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Closed" Binding="{Binding Path=IsClosed}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Winner" Binding="{Binding Path=Winner}"></DataGridTextColumn>
+                
+                <DataGridTemplateColumn Header="Place Bid">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="Green" Visibility="{Binding IsRunning, Converter={StaticResource BooleanToVisibilityConverter}}">Buy</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

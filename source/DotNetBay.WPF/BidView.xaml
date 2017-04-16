@@ -1,0 +1,53 @@
+﻿<Window x:Class="DotNetBay.WPF.BidView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BidView" Height="300" Width="300" ResizeMode="NoResize">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="12"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock FontWeight="Bold" FontSize="20">Place Bid For Auction</TextBlock>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Row="0">Title</Label>
+            <Label Grid.Row="2">Description</Label>
+            <Label Grid.Row="3">Start Price</Label>
+            <Label Grid.Row="4">Current Price</Label>
+            <Label Grid.Row="6" FontSize="16" FontWeight="Bold">Your Bid</Label>
+            
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedAuction.Title}" />
+            <Image Grid.Row="1" Grid.Column="1" Source="{Binding SelectedAuction.Image}" MaxHeight="150"></Image>
+            
+            <TextBlock Grid.Row="2" TextWrapping="Wrap"  Grid.Column="1" Text="{Binding SelectedAuction.Description}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SelectedAuction.StartPrice}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding SelectedAuction.CurrentPrice}"/>
+            <TextBox Grid.Row="6" Grid.Column="1" FontSize="16"  Text="{Binding YourBid}"></TextBox>
+        </Grid>
+        
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Padding="5" Margin="5,5,0,5" IsDefault="True" HorizontalAlignment="Left" Click="PlaceBidAuction_Click">Place Bid</Button>
+            <Button Padding="5" Margin="5,5,0,5" HorizontalAlignment="Left" Click="CloseButton_Click">Cancel</Button>
+        </StackPanel>
+
+        </Grid>
+</Window>
