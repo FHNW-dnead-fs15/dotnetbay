@@ -1,5 +1,5 @@
 # dotnetbay - A .NET Auction Solution 
-Master: [![Build status](https://ci.appveyor.com/api/projects/status/qp7ueees06ri8agu?svg=true)](https://ci.appveyor.com/project/michaelschnyder/fhnw-dotnetbay)
+[![Build status](https://ci.appveyor.com/api/projects/status/c96fw4jfw1quya59?svg=true)](https://ci.appveyor.com/project/CDRO/dotnetbay)
 
 A bootstrap solution to build your own basic auction portal. For an implementation example visit https://github.com/michaelschnyder/dotnetbay
 
@@ -29,7 +29,9 @@ The following products / tools are needed to contribute / fork.
 * NCrunch [http://www.ncrunch.net/](http://www.ncrunch.net/ http://www.ncrunch.net/)
 
 ## Authors
-* Michael Schnyder
+* Tizian Schmidlin <tizian.schmidlin@students.fhnw.ch>
+* Christian Weber <christian.weber3@students.fhnw.ch>
+* Roman Holzner <roman.holzner@students.fhnw.ch>
 
 ## License
 Licensed under the MIT License

@@ -4,13 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB070B8C-4CBF-425D-90FA-48834DBEE9B8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{3B1A523E-C292-4AF5-8E52-2BC655F0E40A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetBay.Cmd</RootNamespace>
-    <AssemblyName>DotNetBay.Cmd</AssemblyName>
+    <RootNamespace>DotNetBay.WPF</RootNamespace>
+    <AssemblyName>DotNetBay.WPF</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -34,17 +36,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="Xceed.Wpf.AvalonDock">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -53,11 +57,9 @@
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Xceed.Wpf.DataGrid">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
@@ -67,28 +69,85 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Command\AuctionCmd.cs" />
+    <Compile Include="ViewModel\BidViewModel.cs" />
+    <Compile Include="ViewModel\SellViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SellView.xaml.cs">
+      <DependentUpon>SellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AuctionListViewModel.cs" />
+    <Page Include="View\BidView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\BidView.xaml.cs">
+      <DependentUpon>BidView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\BoolToStatusConverter.cs" />
+    <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotNetBay.Core\DotNetBay.Core.csproj">
-      <Project>{9EF46B21-B552-4CC6-A4C0-E81091A4064B}</Project>
+      <Project>{9ef46b21-b552-4cc6-a4c0-e81091a4064b}</Project>
       <Name>DotNetBay.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DotNetBay.Data.FileStorage\DotNetBay.Data.FileStorage.csproj">
-      <Project>{92942123-C7EC-4418-9B48-F5D62BE7E7A3}</Project>
+      <Project>{92942123-c7ec-4418-9b48-f5d62be7e7a3}</Project>
       <Name>DotNetBay.Data.FileStorage</Name>
     </ProjectReference>
     <ProjectReference Include="..\DotNetBay.Interfaces\DotNetBay.Interfaces.csproj">
-      <Project>{17745E6C-337C-44BD-9C50-5F1D45CEADA5}</Project>
+      <Project>{17745e6c-337c-44bd-9c50-5f1d45ceada5}</Project>
       <Name>DotNetBay.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\DotNetBay.Model\DotNetBay.Model.csproj">
-      <Project>{908D8739-3185-46EB-A03E-6B6C3849857C}</Project>
+      <Project>{908d8739-3185-46eb-a03e-6b6c3849857c}</Project>
       <Name>DotNetBay.Model</Name>
     </ProjectReference>
   </ItemGroup>

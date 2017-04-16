@@ -1,0 +1,47 @@
+﻿<Window x:Class="DotNetBay.WPF.SellView"
+        x:Name="SellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpftk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="SellView" Height="350" Width="525">
+    <DockPanel Margin="5,5,5,5">
+        <Label DockPanel.Dock="Top" Content="Add new Auction" FontSize="20" FontWeight="Bold" />
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+            <Button Width="Auto" Content="Save" Margin="5,0,5,0"></Button>
+            <Button Width="Auto" Content="Cancel" Margin="5,0,5,0" Command="{Binding CloseWindowCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=SellWindow}"></Button>
+        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Title"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Description"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Start Price"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Start"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="End"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="Image"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5,0,5,0"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0,5,0"></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,0,5,0"></TextBox>
+            <wpftk:DateTimePicker Grid.Row="3" Grid.Column="1" Margin="5,0,5,0" AllowSpin="True" ClipValueToMinMax="True"/>
+            <wpftk:DateTimePicker Grid.Row="4" Grid.Column="1" Margin="5,0,5,0" AllowSpin="True" ClipValueToMinMax="True"/>
+            <DockPanel Grid.Row="5" Grid.Column="1" >
+                <Button DockPanel.Dock="Right" Width="20" Content="..." Margin="5,0,5,0" />
+                <TextBox Margin="5,0,5,0" />
+            </DockPanel>
+
+        </Grid>
+
+    </DockPanel>
+    
+</Window>
