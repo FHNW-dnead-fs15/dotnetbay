@@ -1,5 +1,6 @@
 # dotnetbay - A .NET Auction Solution 
 Master: [![Build status](https://ci.appveyor.com/api/projects/status/qp7ueees06ri8agu?svg=true)](https://ci.appveyor.com/project/michaelschnyder/fhnw-dotnetbay)
+Fork: [![Build status](https://ci.appveyor.com/api/projects/status/82sl4qpht9atbdeb?svg=true)](https://ci.appveyor.com/project/michaelschnyder/dotnetbay)
 
 A bootstrap solution to build your own basic auction portal. For an implementation example visit https://github.com/michaelschnyder/dotnetbay
 
@@ -8,7 +9,7 @@ This is the starting point for various extensions to the core business library. 
 
 With focus on the .NET-Stack, at least the following technologies should be added to extend the base implementation.
 
-* WPF / XAML UI
+* WPF / XAML UI ([WPF Solution](https://github.com/michaelschnyder/dotnetbay/tree/wpf), [MVVM Solution](https://github.com/michaelschnyder/dotnetbay/tree/mvvm))
 * EntityFramework
 * ASP.NET MVC 5 UI 
 * ASP.NET WebApi
